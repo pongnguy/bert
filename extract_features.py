@@ -23,11 +23,11 @@ import collections
 import json
 import re
 
-import modeling
+import bert_qa.modeling
 import tokenization
 import tensorflow as tf
 
-flags = tf.flags
+flags = tf.compat.v1.flags
 
 FLAGS = flags.FLAGS
 
@@ -157,7 +157,7 @@ def model_fn_builder(bert_config, init_checkpoint, layer_indexes, use_tpu,
     input_mask = features["input_mask"]
     input_type_ids = features["input_type_ids"]
 
-    model = modeling.BertModel(
+    model = bert_qa.modeling.BertModel(
         config=bert_config,
         is_training=False,
         input_ids=input_ids,
@@ -171,7 +171,7 @@ def model_fn_builder(bert_config, init_checkpoint, layer_indexes, use_tpu,
     tvars = tf.trainable_variables()
     scaffold_fn = None
     (assignment_map,
-     initialized_variable_names) = modeling.get_assignment_map_from_checkpoint(
+     initialized_variable_names) = bert_qa.modeling.get_assignment_map_from_checkpoint(
          tvars, init_checkpoint)
     if use_tpu:
 
