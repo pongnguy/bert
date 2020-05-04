@@ -143,7 +143,7 @@ def model_fn_builder(num_labels, learning_rate, num_train_steps,
   return model_fn
 
 
-def create_tokenizer_from_hub_module(bert_hub_module_handle):
+def create_tokenizer_from_hub_module(bert_hub_module_handle):  # Alfred create the tokenizer
   """Get the vocab file and casing info from the Hub module."""
   with tf.Graph().as_default():
     bert_module = hub.Module(bert_hub_module_handle)
@@ -178,7 +178,7 @@ def main(_):
 
   label_list = processor.get_labels()
 
-  tokenizer = create_tokenizer_from_hub_module(FLAGS.bert_hub_module_handle)
+  tokenizer = create_tokenizer_from_hub_module(FLAGS.bert_hub_module_handle) # Alfred create tokenizer
 
   tpu_cluster_resolver = None
   if FLAGS.use_tpu and FLAGS.tpu_name:
